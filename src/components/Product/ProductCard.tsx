@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Product } from "../../Types/product";
-import { cartStore } from "../../stores/cartStore";
+import { useCartStore } from "../../stores/cartStore";
 import axios from "axios";
 
 const ProductCard = (props: Product) => {
   const [isInCart, setIsInCart] = useState<boolean>(false);
+  const cStore = useCartStore();
 
   const handleAddToCart = async () => {
     try {
       await axios.post("http://localhost:5000/cart", {
         ...props,
       });
+      cStore.addToCart({ ...props });
       setIsInCart(true);
     } catch (error) {}
   };
@@ -25,14 +27,13 @@ const ProductCard = (props: Product) => {
   const handleRemoveFromCart = async () => {
     try {
       await axios.delete(`http://localhost:5000/cart/${props.id}`);
+      cStore.removeFromCart({ ...props });
       setIsInCart(false);
     } catch (error) {}
   };
   useEffect(() => {
     handleIsInCart();
   }, []);
-
-  const store = cartStore();
   return (
     <div className="bg-stone-700 rounded-md p-2 border border-stone-600 shadow-md flex flex-col justify-between">
       <img

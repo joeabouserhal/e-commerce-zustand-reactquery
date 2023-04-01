@@ -1,11 +1,13 @@
 import { create } from "zustand";
 import { Product } from "../Types/product";
+import axios from "axios";
 type Store = {
   cartItems: Product[];
   addToCart: (product: Product) => void;
-  setCart: (products: Product[]) => void;
+  removeFromCart: (product: Product) => void;
+  setCart: () => void;
 };
-export const cartStore = create<Store>((set) => ({
+export const useCartStore = create<Store>((set, get) => ({
   cartItems: [] as Product[],
   addToCart: (product: Product) => {
     set((state) => ({
@@ -13,10 +15,17 @@ export const cartStore = create<Store>((set) => ({
       cartItems: [...state.cartItems, product],
     }));
   },
-  setCart: (products: Product[]) => {
+  removeFromCart: (product: Product) => {
     set((state) => ({
       ...state,
-      cartItems: products,
+      cartItems: state.cartItems.filter((prod) => prod.id != product.id),
+    }));
+  },
+  setCart: async () => {
+    const response = await axios.get("http://localhost:5000/cart");
+    set((state) => ({
+      ...state,
+      cartItems: response.data,
     }));
   },
 }));
