@@ -22,9 +22,9 @@ const ProductsPage = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Products</h1>
-      <div>
+    <div className="mx-10">
+      <h1 className="text-2xl my-5">Products</h1>
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 content-center mx-auto gap-10">
         {store.products.map((product: Product) => (
           <ProductCard
             description={product.description}
