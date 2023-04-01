@@ -4,7 +4,14 @@
 @tailwind utilities;
 
 :root {
-  @apply bg-stone-800;
-  @apply text-stone-300;
+  @apply bg-stone-800 text-stone-300;
   font-family: "Lato", sans-serif;
+}
+
+.btn-blue {
+  @apply bg-blue-500 text-blue-950 p-1 px-2 rounded-md hover:cursor-pointer transition hover:bg-blue-700 active:bg-blue-800 focus:outline outline-2 outline-blue-600 outline-offset-2;
+}
+
+.btn-red {
+  @apply bg-red-500 text-red-950 p-1 px-2 rounded-md hover:cursor-pointer transition hover:bg-red-700 active:bg-red-800 focus:outline outline-2 outline-red-600 outline-offset-2;
 }
