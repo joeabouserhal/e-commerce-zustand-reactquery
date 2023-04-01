@@ -1,0 +1,11 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "PS5",
+      "description": "Gaming n stuff",
+      "price": 500,
+      "photo": ""
+    }
+  ]
+}
